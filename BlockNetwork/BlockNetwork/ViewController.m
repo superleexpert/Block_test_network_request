@@ -21,6 +21,7 @@
     [self aBlockTest];
     [self aBlockCallBack];
     [self aBlockNetworkInstance];
+    [self aMyBlock];
 }
 
 - (void)aBlockTest
@@ -47,6 +48,15 @@
     [[Tracker sharedInstance] sendNetworkRequest:@"http://www.networkBlock.com" complete:^(NSDictionary *respondData, NSError * error, int status){
         NSLog(@"Do something for your network request success or failed!");
     }];
+}
+
+- (void)aMyBlock
+{
+    Tracker *tracker = [[Tracker alloc] init];
+    tracker.leeBlock = ^(NSArray *array){
+        NSLog(@"TODU %@", array);
+    };
+    [tracker blockTest];
 }
 
 - (void)didReceiveMemoryWarning {

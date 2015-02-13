@@ -62,4 +62,10 @@
     return self;
 }
 
+- (void)blockTest
+{
+    NSArray *array = @[@"Lee01", @"Lee02", @"Lee03"];
+    _leeBlock(array);
+}
+
 @end
