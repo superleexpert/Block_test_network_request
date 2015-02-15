@@ -31,6 +31,8 @@ typedef NS_ENUM(NSInteger, BlockTest) {
     [self aMyBlock];
     [self aEnumTest:1];
     [self testString];
+    [self orderTest];
+
 }
 
 - (void)aBlockTest
@@ -97,6 +99,24 @@ typedef NS_ENUM(NSInteger, BlockTest) {
     NSString *test3 = testStr;
     testStr = @"改变字符串";
     NSLog(@"test1 :%@,\n test2 :%@,\n test3 :%@", test1, test2, test3);
+}
+
+- (void)orderTest
+{
+    NSMutableArray *array = [NSMutableArray arrayWithObjects:@"1", @"6", @"2", @"5", @"4", @"3", @"4", @"2", nil];
+    [self sort:array];
+}
+
+- (void)sort:(NSMutableArray *)arr
+{
+    for (int i = 1; i < arr.count; i ++) {//首先遍历数组，从第二个元素开始选取来插入排序
+        NSInteger temp = [arr[i] integerValue];
+        for (int j = i - 1; j >= 0 && temp < [arr[j] integerValue]; j --) {//插入比较大小，从遍历对象的前一个元素开始比较；每次比较后j--继续比较前面的元素
+            arr[j + 1] = arr[j];//被遍历元素被赋值为前一个大的元素，
+            arr[j] = [NSNumber numberWithInteger:temp];//先前移动一个元素位置
+        }
+    }
+    NSLog(@"插入排序后：%@",arr);  
 }
 
 - (void)didReceiveMemoryWarning {
